@@ -1,23 +1,13 @@
 import "./ExpenseItem.css";
 import ExpenseDate from "./ExpenseDate";
 import Card from './Card';
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-function ExpenseItem({ title: initialTitle, amount, date }) {
-    const [title, setTitle] = useState(initialTitle);
-
-    useEffect(() => {
-        setTitle(initialTitle);
-    }, [initialTitle]);
-
-    const clickHandlerServer = () => {
-        fetch(
-            `http://localhost:3000/countries/${title}/${amount}/${date}`
-        ).catch((err) => console.log(err));
-    };
+function ExpenseItem({ id, title, amount, date, onUpdateTitle }) {
 
     const clickFunc = () => {
-        setTitle("Updated");
+        const newTitle = "Updated";
+        onUpdateTitle(id, newTitle);
     };
 
     return (
@@ -28,7 +18,6 @@ function ExpenseItem({ title: initialTitle, amount, date }) {
                 <div className="expense-item__price">${amount}</div>
             </div>
             <button onClick={clickFunc}>Change Title</button>
-            <button onClick={clickHandlerServer}>Add to Server</button>
         </Card>
     );
 }

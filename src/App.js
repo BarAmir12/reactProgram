@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Expenses from "./components/Expenses";
 import ExpenseForm from "./components/ExpenseForm";
-import Clock from './components/Clock';
 import './App.css';
 
 function App() {
@@ -18,12 +17,19 @@ function App() {
     });
   };
 
+  const updateTitleHandler = (id, newTitle) => {
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map(expense =>
+        expense.id === id ? { ...expense, title: newTitle } : expense
+      );
+    });
+  };
+
   return (
     <div className="app">
-      <Clock />
       <h2>Cars List</h2>
       <ExpenseForm onAddExpense={addExpenseHandler} />
-      <Expenses expenses={expenses} />
+      <Expenses expenses={expenses} onUpdateTitle={updateTitleHandler} />
     </div>
   );
 }

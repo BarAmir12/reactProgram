@@ -20,6 +20,7 @@ const ExpenseForm = ({ onAddExpense }) => {
         }
 
         const expenseData = {
+            id: Math.random().toString(),
             title,
             amount: +amount,
             date: new Date(date),
